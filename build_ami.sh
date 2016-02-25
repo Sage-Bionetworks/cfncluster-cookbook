@@ -9,17 +9,17 @@ public=$3
 available_os="centos6 centos7 alinux ubuntu1404"
 available_regions="eu-west-1,ap-southeast-1,ap-southeast-2,eu-central-1,ap-northeast-1,ap-northeast-2,us-east-1,sa-east-1,us-west-1"
 
-if [ "x$os" == "x" ]; then
-  echo "Must provide OS to build."
-  echo "Options: all $available_os"
-  exit 1
-fi
+# if [ "x$os" == "x" ]; then
+#   echo "Must provide OS to build."
+#   echo "Options: all $available_os"
+#   exit 1
+# fi
 
-if [ "x$region" == "x" ]; then
-  echo "Must provide AWS region to build for."
-  echo "Options: us-west-2 all"
-  exit 1
-fi
+# if [ "x$region" == "x" ]; then
+#   echo "Must provide AWS region to build for."
+#   echo "Options: us-west-2 all"
+#   exit 1
+# fi
 
 if [ "$public" == "public" ]; then
   export AMI_PERMS="all"
@@ -34,6 +34,7 @@ RC=0
 rm -rf ../vendor/cookbooks || RC=1
 berks vendor ../vendor/cookbooks || RC=1
 export BUILD_DATE=`date +%Y%m%d%H%M`
+export BERKSHELF_VERSION=`berks version`
 
 case $os in
 all)
